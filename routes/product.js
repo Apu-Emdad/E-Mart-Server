@@ -7,16 +7,45 @@ const {
 const CryptoJS = require("crypto-js");
 const Product = require("../models/Product");
 
-/* ==== create a product ====*/
+/* ==== create many product ====*/
 router.post("/", async (req, res) => {
-  const newProduct = new Product(req.body);
+  const Products = req.body;
+  // const newProduct = new Product(req.body);
+  console.log(Products);
   try {
-    const savedProduct = await newProduct.save();
-    res.send(savedProduct);
+    for (const product of Products) {
+      console.log(product);
+      await product.color.push("All");
+      await product.size.push("All");
+      const newProduct = new Product(product);
+      const savedProduct = await newProduct.save();
+    }
+    // const savedProduct = await newProduct.save();
+
+    res.send("hello");
   } catch (err) {
     res.status(500).json(err.message);
   }
 });
+
+/* ==== create a product ====*/
+/* router.post("/", async (req, res) => {
+  let reqProduct = req.body;
+  await reqProduct.color.push("All");
+  await reqProduct.size.push("All");
+
+  console.log(reqProduct);
+  const newProduct = new Product(req.body);
+
+  try {
+    const savedProduct = await newProduct.save();
+
+    // res.send(savedProduct);
+    res.send("hello");
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+}); */
 
 /* ==== update Product ====*/
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
@@ -80,12 +109,11 @@ router.get("/", async (req, res) => {
 });
 
 /* ====deleting the products ==== */
-/* 
-const deleteProduct = async () => {
+
+/* const deleteProduct = async () => {
   const query = await Product.deleteMany();
   console.log(query);
 };
-deleteProduct(); 
- */
+deleteProduct(); */
 
 module.exports = router;
