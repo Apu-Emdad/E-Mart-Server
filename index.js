@@ -10,6 +10,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -26,6 +27,7 @@ app.use("/e-mart/auth", authRoute);
 app.use("/e-mart/products", productRoute);
 app.use("/e-mart/carts", cartRoute);
 app.use("/e-mart/orders", orderRoute);
+app.use("/e-mart/checkout", stripeRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello from E-Mart");

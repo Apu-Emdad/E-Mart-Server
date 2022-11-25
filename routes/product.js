@@ -82,7 +82,6 @@ router.get("/find/:id", async (req, res) => {
     res.send(result);
   } catch (err) {
     res.status(500).send(err.message);
-    console.log(message);
   }
 });
 
