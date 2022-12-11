@@ -10,10 +10,12 @@ const Order = require("../models/Order");
 /* ==== create an order ==== */
 router.post("/:id", verifyTokenAndAuthorization, async (req, res) => {
   const newOrder = new Order(req.body);
+  console.log(newOrder);
 
   try {
     const savedOrder = await newOrder.save();
     res.send(savedOrder);
+    console.log(savedOrder);
   } catch (err) {
     res.status(500).json(err.message);
   }
@@ -61,7 +63,9 @@ router.get("/find/:userId", verifyTokenAndAdmin, async (req, res) => {
 /* ==== get all order ==== */
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
+    console.log("orders get hit");
     const orders = await Order.find();
+    console.log(orders);
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).send(err.message);
@@ -99,5 +103,10 @@ router.get("/revenue", verifyTokenAndAdmin, async (req, res) => {
     console.log(message);
   }
 });
+/* const deleteOrder = async () => {
+  const query = await Order.deleteMany();
+  console.log(query);
+};
+deleteOrder(); */
 
 module.exports = router;

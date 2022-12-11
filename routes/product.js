@@ -10,19 +10,19 @@ const Product = require("../models/Product");
 /* ==== create many product ====*/
 router.post("/", async (req, res) => {
   const Products = req.body;
-  // const newProduct = new Product(req.body);
+  const newProduct = new Product(req.body);
   console.log(Products);
   try {
-    for (const product of Products) {
+    /* for (const product of Products) {
       console.log(product);
       await product.color.push("All");
       await product.size.push("All");
       const newProduct = new Product(product);
       const savedProduct = await newProduct.save();
-    }
-    // const savedProduct = await newProduct.save();
+    } */
+    const savedProduct = await newProduct.save();
 
-    res.send("hello");
+    res.send(savedProduct);
   } catch (err) {
     res.status(500).json(err.message);
   }
