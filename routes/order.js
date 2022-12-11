@@ -50,9 +50,9 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 /* ==== Get user order ==== */
-router.get("/find/:userId", verifyTokenAndAdmin, async (req, res) => {
+router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
-    result = await Order.find({ userId: req.params.userId });
+    result = await Order.find({ userId: req.params.id });
     res.send(result);
   } catch (err) {
     res.status(500).send(err.message);
