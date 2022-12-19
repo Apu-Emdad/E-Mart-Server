@@ -3,7 +3,7 @@
       E-Mart
     </h1>
     <p>
-      E-Mart is an MERN E-Commerce app which sells clothes of different sizes
+      E-Mart is a MERN E-Commerce app which sells clothes of different sizes
       and colors
     </p>  
     <p>Live Link: https://e-mart12.netlify.app/home </p>
